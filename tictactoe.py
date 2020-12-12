@@ -3,23 +3,28 @@
 import re
 import pytest
 
+valid_move = "X"
+
 def check_pattern(board_state):
-    winning_patterns = ["XXX.", ".XXX", "X..X..X..", ".X..X..X.",
-                        "..X..X..X", "X...X...X", "..X.X.X..",
-                        "OOO.", ".OOO", "O..O..O..", ".O..O..O.",
-                        "..O..O..O", "O...O...O", "..O.O.O.."]
+    winning_patterns = ["^XXX", "XXX$", "X..X..X..", ".X..X..X.",
+                        "..X..X..X", "X...X...X", "..X.X.X..", "...XXX...",
+                        "^OOO", "OOO$", "O..O..O..", ".O..O..O.",
+                        "..O..O..O", "O...O...O", "..O.O.O..", "...OOO...",]
     is_there_a_match = False
 
     for pattern in winning_patterns:
         if re.search(pattern, board_state):
             is_there_a_match = True
+            print("pattern: ", pattern)
             break
 
     return is_there_a_match
 
 def is_move_valid(board="", move=""):
-    return (len(move) == 2 and int(move[0]) in range(1, 10)
-            and move[1].capitalize() in ('X', 'O'))
+    is_move_valid =(len(move) == 2 and int(move[0]) in range(1, 10)
+                    and move[1].capitalize() == valid_move)
+    valid_move = "O"
+    return is_move_valid
 
 def main():
     board_display = """

@@ -51,14 +51,17 @@ def test_pattern_16():
 def test_pattern_17():
     assert True == check_pattern("12X4X6X89")
 
-def test_move_1():
-    assert True == is_move_valid(move="1x")
+def test_pattern_18():
+    assert False == check_pattern("OXXXOOXOX")
 
-def test_move_2():
-    assert False == is_move_valid(move="0x")
+# def test_move_1():
+#     assert True == is_move_valid(move="1x")
 
-def test_move_3():
-    assert False == is_move_valid(move="7a")
+# def test_move_2():
+#     assert False == is_move_valid(move="0x")
 
-def test_move_4():
-    assert False == is_move_valid(move="10O")
+# def test_move_3():
+#     assert False == is_move_valid(move="7a")
+
+# def test_move_4():
+#     assert False == is_move_valid(move="10O")

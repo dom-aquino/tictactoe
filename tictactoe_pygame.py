@@ -21,6 +21,9 @@ o_img.set_colorkey(1)
 def get_column_and_row_position_of_the_click():
     x_coordinate, y_coordinate = pygame.mouse.get_pos()
 
+    print("x_coordinate: ", x_coordinate)
+    print("y_coordinate: ", y_coordinate)
+
     if x_coordinate in range(160, 290):
         column = 1
     elif x_coordinate in range(320, 470):
@@ -56,13 +59,15 @@ def get_cell_number_in_the_board(column, row):
             cell_number = 5
         else:
             cell_number = 8
-    else:
+    elif column == 3:
         if row == 1:
             cell_number = 3
         elif row == 2:
             cell_number = 6
         else:
             cell_number = 9
+    else:
+        cell_number = None
 
     return cell_number
 
@@ -94,6 +99,9 @@ def get_position_where_to_put_the_mark(cell_num):
     elif cell_num == 9:
         x_position = 520
         y_position = 450
+    else:
+        x_position = None
+        y_position = None
 
     return x_position, y_position
 
@@ -111,10 +119,10 @@ def update_board(current_turn, x_position, y_position):
     pygame.display.update()
 
 def is_there_a_winner(board_state):
-    winning_patterns = ["XXX.", ".XXX", "X..X..X..", ".X..X..X.",
-                        "..X..X..X", "X...X...X", "..X.X.X..",
-                        "OOO.", ".OOO", "O..O..O..", ".O..O..O.",
-                        "..O..O..O", "O...O...O", "..O.O.O.."]
+    winning_patterns = ["^XXX", "XXX$", "X..X..X..", ".X..X..X.",
+                        "..X..X..X", "X...X...X", "..X.X.X..", "...XXX...",
+                        "^OOO", "OOO$", "O..O..O..", ".O..O..O.",
+                        "..O..O..O", "O...O...O", "..O.O.O..", "...OOO...",]
     is_there_a_match = False
 
     for pattern in winning_patterns:
@@ -138,15 +146,20 @@ def main():
                 pygame.quit()
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 column, row = get_column_and_row_position_of_the_click()
+                print("Column: ", column)
+                print("Row: ", row)
                 cell_number = get_cell_number_in_the_board(column, row)
                 if is_the_move_valid(cell_number, board_mapping):
                     x_pos, y_pos = get_position_where_to_put_the_mark(cell_number)
                     update_board(current_turn, x_pos, y_pos)
                     board_mapping = board_mapping.replace(str(cell_number), current_turn)
+                    print('board_mapping: ', board_mapping)
                     if is_there_a_winner(board_mapping):
                         print("We have a winner!!!")
+                        break
                     if not re.search('[0-9]', board_mapping):
                         print("We have a draw!!!")
+                        break
                     current_turn = 'O' if current_turn == 'X' else 'X'
 
 if __name__ == "__main__":
