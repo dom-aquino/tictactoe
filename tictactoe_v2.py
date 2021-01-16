@@ -1,7 +1,7 @@
+#!/usr/bin/python3
+
 import pygame
 import re
-import tkinter
-import tkinter.messagebox
 
 class GameBoard():
     def __init__(self):
@@ -179,10 +179,10 @@ def main():
                     game_board.update_board(x_position, y_position)
                     game_board.board_mapping = game_board.board_mapping.replace(str(cell_number), game_board.current_turn)
                     if is_there_a_winner(game_board.board_mapping):
-                        tkinter.messagebox.showinfo("We have a winner!", "OK")
+                        print("WE HAVE A WINNER!")
                         break
                     if not re.search('[0-9]', game_board.board_mapping):
-                        tkinter.messagebox.showinfo("We have a draw!", "OK")
+                        print("WE HAVE A DRAW!")
                         break
                 # print("x_coordinate: ", x_coordinate)
                 # print("y_coordinate: ", y_coordinate)
