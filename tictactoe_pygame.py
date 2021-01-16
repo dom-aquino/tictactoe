@@ -5,10 +5,11 @@ pygame.init()
 LENGTH = 800
 WIDTH = 640
 screen = pygame.display.set_mode([LENGTH, WIDTH])
-screen.fill((255, 255, 255))
-game_board = pygame.image.load("img/tictactoe_board.jpg")
-game_board = pygame.transform.scale(game_board, [LENGTH, WIDTH])
-screen.blit(game_board, (0, 0))
+screen.fill((0, 0, 0))
+# game_board = pygame.image.load("img/tictactoe_board.jpg")
+# game_board = pygame.transform.scale(game_board, [LENGTH, WIDTH])
+pygame.draw.rect(screen, (255, 0, 0), pygame.Rect(30, 30, 60, 60))
+# screen.blit(game_board, (0, 0))
 pygame.display.update()
 
 x_img = pygame.image.load("img/x_mark.png")
@@ -23,6 +24,9 @@ def get_column_and_row_position_of_the_click():
 
     print("x_coordinate: ", x_coordinate)
     print("y_coordinate: ", y_coordinate)
+
+    if x_coordinate in range(30, 90) and y_coordinate in range(30, 90):
+        pygame.quit()
 
     if x_coordinate in range(160, 290):
         column = 1
@@ -76,29 +80,29 @@ def get_position_where_to_put_the_mark(cell_num):
         x_position = 180
         y_position = 80
     elif cell_num == 2:
-        x_position = 350
-        y_position = 80
-    elif cell_num == 3:
-        x_position = 520
-        y_position = 80
-    elif cell_num == 4:
-        x_position = 180
-        y_position = 260
-    elif cell_num == 5:
-        x_position = 350
-        y_position = 260
-    elif cell_num == 6:
-        x_position = 520
-        y_position = 260
-    elif cell_num == 7:
-        x_position = 180
-        y_position = 450
-    elif cell_num == 8:
-        x_position = 350
-        y_position = 450
-    elif cell_num == 9:
-        x_position = 520
-        y_position = 450
+        x_position = 106
+        y_position = 175
+    # elif cell_num == 3:
+    #     x_position = 298
+    #     y_position = 111
+    # elif cell_num == 4:
+    #     x_position = 43
+    #     y_position = 246
+    # elif cell_num == 5:
+    #     x_position = 171
+    #     y_position = 235
+    # elif cell_num == 6:
+    #     x_position = 297
+    #     y_position = 239
+    # elif cell_num == 7:
+    #     x_position = 38
+    #     y_position = 355
+    # elif cell_num == 8:
+    #     x_position = 174
+    #     y_position = 356
+    # elif cell_num == 9:
+    #     x_position = 293
+    #     y_position = 355
     else:
         x_position = None
         y_position = None
